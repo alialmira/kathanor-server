@@ -1,0 +1,88 @@
+package net.springbootserver.kathanorbackend.controllers;
+
+import net.springbootserver.kathanorbackend.models.Documents;
+import net.springbootserver.kathanorbackend.models.ResponseMessage;
+import net.springbootserver.kathanorbackend.repositories.IDocumentRepository;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+@RequestMapping("/kathanor-api/document")
+public class DocumentController {
+
+  @Autowired
+  private IDocumentRepository documentRepository;
+
+  public DocumentController(IDocumentRepository documentRepo) {
+    this.documentRepository = documentRepo;
+  }
+
+  @ApiOperation(value = "Get document by id", nickname = "getDocument")
+  @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+  public Documents GetById(@PathVariable("id") String id) {
+    return this.documentRepository.findBy_id(id);
+  }
+
+  @ApiOperation(value = "Get all documents", nickname = "getDocuments")
+  @RequestMapping(value = "/", method = RequestMethod.GET)
+  public List<Documents> GetAll() {
+    List<Documents> DocumentsList = this.documentRepository.findAll();
+    return DocumentsList;
+  }
+
+  @ApiOperation(value = "Upload some documents", nickname = "uploadDocument")
+  @PostMapping("/upload/{id}")
+  public ResponseEntity<ResponseMessage> uploadFile(@PathVariable("id") String id,
+      @ApiParam(name = "file", value = "Select the file to Upload", required = true) @RequestPart("file") MultipartFile file)
+      throws IOException {
+    Optional<Documents> doc = this.documentRepository.findById(id);
+    if (!doc.isEmpty()) {
+      Documents data = doc.get();
+      data.setfile(new String(file.getBytes()));
+      this.documentRepository.save(data);
+      String message = "Uploaded the file successfully: ";
+      return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+    } else {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseMessage("Document not FOund"));
+    }
+  }
+
+  @ApiOperation(value = "Insert some documents", nickname = "addDocument")
+  @RequestMapping(value = "/", method = RequestMethod.POST)
+  public Documents Insert(@RequestBody Documents model) {
+    this.documentRepository.insert(model);
+    return model;
+  }
+
+  @ApiOperation(value = "Update this document", nickname = "updateDocument")
+  @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+  public Documents Update(@PathVariable("id") ObjectId id, @Validated @RequestBody Documents model) {
+    model.set_id(id);
+    this.documentRepository.save(model);
+    return model;
+  }
+
+  @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+  public void Delete(@PathVariable String id) {
+    this.documentRepository.delete(this.documentRepository.findBy_id(id));
+  }
+}
