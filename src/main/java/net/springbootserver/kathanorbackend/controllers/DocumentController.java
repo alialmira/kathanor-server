@@ -66,7 +66,7 @@ public class DocumentController {
     }
   }
 
-  @ApiOperation(value = "Insert some documents", nickname = "addDocument")
+  @ApiOperation(value = "Insert some employee documents", nickname = "addEmployeeDocument")
   @RequestMapping(value = "/", method = RequestMethod.POST)
   public Documents Insert(@RequestBody Documents model) {
     this.documentRepository.insert(model);

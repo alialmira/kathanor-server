@@ -19,7 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/sms-api/file")
+@RequestMapping("/kathanor-api/file")
 public class FileController {
 
   private static final Logger logger = LoggerFactory.getLogger(
@@ -41,7 +41,7 @@ public class FileController {
 
     String fileDownloadUri = ServletUriComponentsBuilder
       .fromCurrentContextPath()
-      .path("sms-api/file/downloadFile/")
+      .path("kathanor-api/file/downloadFile/")
       .path(fileName)
       .toUriString();
 

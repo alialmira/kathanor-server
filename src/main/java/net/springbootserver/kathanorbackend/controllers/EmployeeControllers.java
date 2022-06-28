@@ -29,14 +29,20 @@ public class EmployeeControllers {
         this.employeeRepository = employeeRepo;
     }
 
-    @ApiOperation(value = "Get all employees", nickname = "getEmployee")
+    @ApiOperation(value = "Get employee account by id", nickname = "getEmployeeById")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Employee GetById(@PathVariable("id") ObjectId id) {
+        return this.employeeRepository.findBy_id(id);
+    }
+
+    @ApiOperation(value = "Get all employee account", nickname = "getEmployee")
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Employee> GetAll() {
         List<Employee> EmployeesList = this.employeeRepository.findAll();
         return EmployeesList;
     }
     
-    @ApiOperation(value = "Insert some employee", nickname = "addEmployee")
+    @ApiOperation(value = "Insert some employee account", nickname = "addEmployee")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public Employee Insert(@RequestBody Employee model) {
         model.setId(ObjectId.get());
@@ -44,7 +50,7 @@ public class EmployeeControllers {
         return model;
     }
     
-    @ApiOperation(value = "Update this employee", nickname = "updateEmployee")
+    @ApiOperation(value = "Update this employee account", nickname = "updateEmployee")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Employee Update(@PathVariable("id") ObjectId id, @Validated @RequestBody Employee model) {
         model.setId(id);
@@ -52,7 +58,7 @@ public class EmployeeControllers {
         return model;
     }
     
-    @ApiOperation(value = "Delete this employee", nickname = "deleteEmployee")
+    @ApiOperation(value = "Delete this employee account", nickname = "deleteEmployee")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void Delete(@PathVariable("id") ObjectId id) {
         this.employeeRepository.delete(this.employeeRepository.findBy_id(id));
