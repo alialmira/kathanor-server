@@ -10,31 +10,16 @@ public class Documents {
   @Id
   private ObjectId _id;
 
-  private String firstName;
-  private String middleName;
-  private String lastName;
-  private String birthDate;
-  private String birthPlace;
-  private String address;
-  private String agency;
-  private String position;
+  private String employeeId;
   private String file;
   private String docType;
   private String date;
   private String fileName;
   private Boolean fileStatus;
 
-  public Documents(String firstName, String middleName, String lastName, String birthDate,
-    String birthPlace, String address, String agency, String position, String date, 
+  public Documents(String employeeId, String date, 
     String file, String docType, String fileName, Boolean fileStatus) {
-    this.firstName = firstName;
-    this.middleName = middleName;
-    this.lastName = lastName;
-    this.birthDate = birthDate;
-    this.birthPlace = birthPlace;
-    this.address = address;
-    this.agency = agency;
-    this.position = position;
+    this.employeeId = employeeId;
     this.file = file;
     this.date = date;
     this.docType = docType;
@@ -42,12 +27,20 @@ public class Documents {
     this.fileStatus = fileStatus;
   }
 
-  public String get_id() {
+  public String getId() {
     return _id.toHexString();
   }
 
-  public void set_id(ObjectId _Id) {
+  public void setId(ObjectId _Id) {
     this._id = _Id;
+  }
+
+  public String getEmployeeId() {
+    return employeeId;
+  }
+
+  public void setEmployeeId(String employeeId) {
+    this.employeeId = employeeId;
   }
 
   public String getfile() {
@@ -56,70 +49,6 @@ public class Documents {
 
   public void setfile(String file) {
     this.file = file;
-  }
-
-  public void setLastName(String lastName) {
-      this.lastName = lastName;
-  }
-  
-  public String getFirstName() {
-      return firstName;
-  }
-
-  public void setMiddleName(String middleName){
-      this.middleName = middleName;
-  }
-
-  public String getMIddleName() {
-      return middleName;
-  }
-
-  public String getLastName() {
-      return lastName;
-  } 
-
-  public void setFirstName(String firstName) {
-      this.firstName = firstName;
-  }
-
-  public void setBirthDate(String birthDate) {
-      this.birthDate = birthDate;
-  }
-
-  public String getBirthDate() {
-      return birthDate;
-  }
-
-  public void setBirthPlace(String birthPlace) {
-      this.birthPlace = birthPlace;
-  }
-
-  public String getBirthPlace() {
-      return birthPlace;
-  }
-
-  public void setAddress(String address) {
-      this.address = address;
-  }
-
-  public String getAddress() {
-      return address;
-  }
-
-  public void setAgency(String agency){
-      this.agency = agency;
-  }
-
-  public String getAgency(){
-      return agency;
-  }
-
-  public void setPosition(String position) {
-      this.position = position;
-  }
-
-  public String getPosition() {
-      return position;
   }
 
   public String getdocType() {

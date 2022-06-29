@@ -3,6 +3,7 @@ package net.springbootserver.kathanorbackend.controllers;
 import net.springbootserver.kathanorbackend.models.Documents;
 import net.springbootserver.kathanorbackend.models.ResponseMessage;
 import net.springbootserver.kathanorbackend.repositories.IDocumentRepository;
+import net.springbootserver.kathanorbackend.repositories.IEmployeeRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.io.IOException;
@@ -69,14 +70,15 @@ public class DocumentController {
   @ApiOperation(value = "Insert some employee documents", nickname = "addEmployeeDocument")
   @RequestMapping(value = "/", method = RequestMethod.POST)
   public Documents Insert(@RequestBody Documents model) {
+    model.setId(ObjectId.get());
     this.documentRepository.insert(model);
     return model;
-  }
+  }  
 
   @ApiOperation(value = "Update this document", nickname = "updateDocument")
   @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
   public Documents Update(@PathVariable("id") ObjectId id, @Validated @RequestBody Documents model) {
-    model.set_id(id);
+    model.setId(id);
     this.documentRepository.save(model);
     return model;
   }
