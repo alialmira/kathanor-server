@@ -13,8 +13,8 @@ public class Documents {
   private String firstName;
   private String middleName;
   private String lastName;
-  private String bod;
-  private String pod;
+  private String birthDate;
+  private String birthPlace;
   private String address;
   private String agency;
   private String position;
@@ -24,14 +24,14 @@ public class Documents {
   private String fileName;
   private Boolean fileStatus;
 
-  public Documents(String firstName, String middleName, String lastName, String bod,
-    String pod, String address, String agency, String position, String date, 
+  public Documents(String firstName, String middleName, String lastName, String birthDate,
+    String birthPlace, String address, String agency, String position, String date, 
     String file, String docType, String fileName, Boolean fileStatus) {
     this.firstName = firstName;
     this.middleName = middleName;
     this.lastName = lastName;
-    this.bod = bod;
-    this.pod = pod;
+    this.birthDate = birthDate;
+    this.birthPlace = birthPlace;
     this.address = address;
     this.agency = agency;
     this.position = position;
@@ -82,20 +82,20 @@ public class Documents {
       this.firstName = firstName;
   }
 
-  public void setBirthDate(String bod) {
-      this.bod = bod;
+  public void setBirthDate(String birthDate) {
+      this.birthDate = birthDate;
   }
 
   public String getBirthDate() {
-      return bod;
+      return birthDate;
   }
 
-  public void setBirthPlace(String pod) {
-      this.pod = pod;
+  public void setBirthPlace(String birthPlace) {
+      this.birthPlace = birthPlace;
   }
 
   public String getBirthPlace() {
-      return pod;
+      return birthPlace;
   }
 
   public void setAddress(String address) {
