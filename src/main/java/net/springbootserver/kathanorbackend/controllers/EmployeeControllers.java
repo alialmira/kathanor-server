@@ -1,10 +1,7 @@
 package net.springbootserver.kathanorbackend.controllers;
-
 import java.util.List;
-
 import net.springbootserver.kathanorbackend.models.Employee;
 import net.springbootserver.kathanorbackend.repositories.IEmployeeRepository;
-
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
