@@ -43,9 +43,6 @@ public class File201Controllers {
   @Autowired
   private File201Service file201Service;
 
-  @Autowired
-  private File201Repository file201Repo;
-
   @ApiOperation(value = "Upload 201 file", nickname = "upload201File")
   @PostMapping
   public String addFile(
